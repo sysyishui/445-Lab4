@@ -77,36 +77,36 @@ public class StackSort {
      * @return     An array of sorted integers.
      */
     public static int[] doStackSort(int[] data) {
-        // Create two stacks to help with sorting
-        StackInterface<Integer> unsortedStack = new VectorStack<>();
-        StackInterface<Integer> sortedStack = new VectorStack<>();
-        
-        // Push all data into the unsorted stack
-        for (int value : data) {
-            unsortedStack.push(value);
-        }
-        
-        // Sort elements by transferring from unsortedStack to sortedStack
-        while (!unsortedStack.isEmpty()) {
-            int temp = unsortedStack.pop(); // Get the top element from the unsorted stack
-            
-            // Move elements from sortedStack to unsortedStack if they are greater than temp
-            while (!sortedStack.isEmpty() && sortedStack.peek() > temp) {
-                unsortedStack.push(sortedStack.pop());
-            }
-            
-            // Place temp in the correct position in sortedStack
-            sortedStack.push(temp);
-        }
-        
-        // Pop elements from sortedStack back into the array, now in sorted order
-        int[] result = new int[data.length];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = sortedStack.pop();
-        }
-        
-        return result;
+    // Create two stacks to help with sorting
+    StackInterface<Integer> unsortedStack = new VectorStack<>();
+    StackInterface<Integer> sortedStack = new VectorStack<>();
+    
+    // Push all data into the unsorted stack
+    for (int value : data) {
+        unsortedStack.push(value);
     }
+    
+    // Sort elements by transferring from unsortedStack to sortedStack
+    while (!unsortedStack.isEmpty()) {
+        int temp = unsortedStack.pop(); // Get the top element from the unsorted stack
+        
+        // Move elements from sortedStack to unsortedStack if they are greater than temp
+        while (!sortedStack.isEmpty() && sortedStack.peek() > temp) {
+            unsortedStack.push(sortedStack.pop());
+        }
+        
+        // Place temp in the correct position in sortedStack
+        sortedStack.push(temp);
+    }
+    
+    // Pop elements from sortedStack into the result array in reverse order
+    int[] result = new int[data.length];
+    for (int i = result.length - 1; i >= 0; i--) {
+        result[i] = sortedStack.pop();
+    }
+    
+    return result;
+}
 
     /**
      * Load an array with data values
